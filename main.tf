@@ -20,30 +20,6 @@ resource "latitudesh_server" "this" {
   user_data       = var.user_data
 }
 
-# resource "null_resource" "remote_exec" {
-#   count = try(var.provisioners.remote_exec, null) != null ? 1 : 0
-
-#   triggers = {
-#     server_id = latitudesh_server.this.id
-#   }
-
-#   provisioner "remote-exec" {
-#     inline  = try(var.provisioners.remote_exec.inline, null) != null ? var.provisioners.remote_exec.inline : null
-#     script  = try(var.provisioners.remote_exec.script, null) != null && try(var.provisioners.remote_exec.inline, null) == null ? var.provisioners.remote_exec.script : null
-#     scripts = try(var.provisioners.remote_exec.scripts, null) != null && try(var.provisioners.remote_exec.inline, null) == null && try(var.provisioners.remote_exec.script, null) == null ? var.provisioners.remote_exec.scripts : null
-
-#     connection {
-#       type        = var.provisioners.remote_exec.connection.type
-#       host        = try(var.provisioners.remote_exec.connection.host, latitudesh_server.this.primary_ipv4)
-#       user        = try(var.provisioners.remote_exec.connection.user, "ubuntu")
-#       password    = try(var.provisioners.remote_exec.connection.password, null)
-#       port        = try(var.provisioners.remote_exec.connection.port, null)
-#       timeout     = try(var.provisioners.remote_exec.connection.timeout, null)
-#       private_key = try(var.provisioners.remote_exec.connection.private_key, null)
-#     }
-#   }
-# }
-
 resource "null_resource" "remote_exec_inline" {
   count = try(var.provisioners.remote_exec.inline, null) != null ? 1 : 0
 
