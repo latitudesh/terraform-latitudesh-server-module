@@ -159,7 +159,7 @@ variable "raid" {
 
 variable "ssh_keys" {
   type        = list(string)
-  description = "[Optional] SSH Keys to set on the server."
+  description = "[Optional] SSH Keys IDs to set on the server."
   default     = null
 }
 
@@ -173,4 +173,46 @@ variable "user_data" {
   type        = string
   description = "[Optional] User data ID to set on the server."
   default     = null
+}
+
+# Provisioner variables
+variable "provisioners" {
+  type = object({
+    remote_exec = optional(object({
+      inline  = optional(list(string))
+      script  = optional(string)
+      scripts = optional(list(string))
+      connection = object({
+        type        = string
+        host        = optional(string)
+        user        = optional(string)
+        password    = optional(string)
+        port        = optional(number)
+        timeout     = optional(string)
+        private_key = optional(string)
+      })
+    }))
+    local_exec = optional(object({
+      command     = string
+      working_dir = optional(string)
+      interpreter = optional(list(string))
+      environment = optional(map(string))
+    }))
+    file = optional(object({
+      source      = optional(string)
+      content     = optional(string)
+      destination = string
+      connection = object({
+        type        = string
+        host        = optional(string)
+        user        = optional(string)
+        password    = optional(string)
+        port        = optional(number)
+        timeout     = optional(string)
+        private_key = optional(string)
+      })
+    }))
+  })
+  description = "[Optional] Configuration for provisioners (remote-exec, local-exec, file)"
+  default     = {}
 }

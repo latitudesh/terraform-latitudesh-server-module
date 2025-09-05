@@ -14,7 +14,7 @@ provider "latitudesh" {
 module "server" {
   source = "../../"
 
-  hostname         = "tf-server-module-example"
+  hostname         = "tf-module-test-simple-server"
   operating_system = "ubuntu_24_04_x64_lts"
   plan             = "c2-small-x86"
   project          = "proj_X6KG5m9Lk5yPB"

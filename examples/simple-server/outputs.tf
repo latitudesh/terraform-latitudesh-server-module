@@ -1,5 +1,5 @@
-output "server" {
-  value = module.server.server
+output "server_hostname" {
+  value = module.server.server_hostname
 }
 
 output "server_id" {
