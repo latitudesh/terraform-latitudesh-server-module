@@ -112,11 +112,10 @@ variable "site" {
 }
 
 # Optional variables
-
 variable "allow_reinstall" {
   type        = bool
   description = "[Optional] Allow server reinstallation when operating_system, ssh_keys, user_data, raid, or ipxe changes. If false, only in-place updates are allowed."
-  default     = true
+  default     = null
 }
 
 variable "billing" {
@@ -124,10 +123,10 @@ variable "billing" {
   description = "[Optional] The server billing type. Accepts hourly and monthly for on demand projects and yearly for reserved projects."
   default     = null
 
-  #   validation {
-  #     condition     = contains(["hourly", "monthly", "yearly"], var.billing)
-  #     error_message = "Billing type must be one of: hourly, monthly, yearly."
-  #   }
+  validation {
+    condition     = var.billing == null || contains(["hourly", "monthly", "yearly"], var.billing)
+    error_message = "Billing type must be one of: hourly, monthly, yearly."
+  }
 }
 
 variable "ipxe" {
@@ -141,10 +140,10 @@ variable "locked" {
   description = "[Optional] Lock/unlock the server. A locked server cannot be deleted or updated."
   default     = null
 
-  #   validation {
-  #     condition     = var.locked == true || var.locked == false
-  #     error_message = "Locked must be a boolean value."
-  #   }
+  validation {
+    condition     = var.locked == null || var.locked == true || var.locked == false
+    error_message = "Locked must be a boolean value."
+  }
 }
 
 variable "raid" {
@@ -152,10 +151,10 @@ variable "raid" {
   description = "[Optional] RAID mode for the server."
   default     = null
 
-  #   validation {
-  #     condition     = var.raid == "raid-0" || var.raid == "raid-1"
-  #     error_message = "RAID must be one of: raid-0, raid-1."
-  #   }
+  validation {
+    condition     = var.raid == null || var.raid == "raid-0" || var.raid == "raid-1"
+    error_message = "RAID must be one of: raid-0, raid-1."
+  }
 }
 
 variable "ssh_keys" {

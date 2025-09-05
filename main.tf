@@ -18,4 +18,6 @@ resource "latitudesh_server" "this" {
   ssh_keys        = var.ssh_keys
   tags            = var.tags
   user_data       = var.user_data
+
+
 }
