@@ -1,5 +1,74 @@
 # Terraform Module for Latitude.sh Server Provisioning
 
+## Usage
+
+First, export the LatitudeSH authentication token:
+```bash
+export LATITUDESH_AUTH_TOKEN=<your_auth_token>
+```
+
+Then, you can use the module in your Terraform code:
+
+### Simple Server
+
+```hcl
+module "server" {
+  source = "../../"
+
+  hostname         = "tf-module-test-simple-server"
+  operating_system = "ubuntu_24_04_x64_lts"
+  plan             = "c2-small-x86"
+  project          = "proj_X6KG5m9Lk5yPB"
+  site             = "SAO"
+}
+```
+
+### Server with Inline Provisioner
+
+```hcl
+module "server" {
+  source = "../../"
+
+  hostname         = "tf-module-server-inline"
+  operating_system = "ubuntu_24_04_x64_lts"
+  plan             = "c2-small-x86"
+  project          = "proj_X6KG5m9Lk5yPB"
+  site             = "SAO"
+
+  ssh_keys = ["ssh_id_here"]
+
+  provisioners = {
+    remote_exec = {
+      inline = [
+        "sudo apt update",
+        "sudo apt install -y nginx",
+        "sudo systemctl start nginx",
+        "sudo systemctl enable nginx",
+      ]
+      connection = {
+        type        = "ssh"
+        user        = "ubuntu"
+        private_key = file("~/.ssh/id_rsa")
+      }
+    }
+  }
+}
+```
+
+Another examples you can find in the [examples](examples) directory.
+
+### Plan and Apply
+```bash
+terraform init
+terraform plan
+terraform apply
+```
+
+### Destroy the server
+```bash
+terraform destroy
+```
+
 ## Requirements
 
 | Name | Version |
