@@ -13,12 +13,12 @@ Then, you can use the module in your Terraform code:
 
 ```hcl
 module "server" {
-  source = "../../"
+  source = "git::https://github.com/latitudesh/terraform-latitudesh-server-module.git"
 
   hostname         = "tf-module-test-simple-server"
   operating_system = "ubuntu_24_04_x64_lts"
   plan             = "c2-small-x86"
-  project          = "proj_X6KG5m9Lk5yPB"
+  project          = "proj_id_here"
   site             = "SAO"
 }
 ```
@@ -27,12 +27,12 @@ module "server" {
 
 ```hcl
 module "server" {
-  source = "../../"
+  source = "git::https://github.com/latitudesh/terraform-latitudesh-server-module.git"
 
   hostname         = "tf-module-server-inline"
   operating_system = "ubuntu_24_04_x64_lts"
   plan             = "c2-small-x86"
-  project          = "proj_X6KG5m9Lk5yPB"
+  project          = "proj_id_here"
   site             = "SAO"
 
   ssh_keys = ["ssh_id_here"]
