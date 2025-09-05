@@ -20,7 +20,7 @@ module "server" {
   project          = "proj_X6KG5m9Lk5yPB"
   site             = "SAO"
 
-  ssh_keys = ["ssh_R82A0y3yb56mM"]
+  ssh_keys = ["ssh_id_here"]
 
   provisioners = {
     remote_exec = {
@@ -32,7 +32,7 @@ module "server" {
       connection = {
         type        = "ssh"
         user        = "ubuntu"
-        private_key = file("~/.ssh/latitude_key")
+        private_key = file("~/.ssh/id_rsa")
       }
     }
   }
