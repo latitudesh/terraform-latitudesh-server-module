@@ -73,7 +73,7 @@ terraform destroy
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.7 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.6 |
 | <a name="requirement_latitudesh"></a> [latitudesh](#requirement\_latitudesh) | >= 2.5.0 |
 
 ## Providers
