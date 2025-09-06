@@ -1,5 +1,7 @@
 # Terraform Module for Latitude.sh Server Provisioning
 
+[![CI](https://github.com/latitudesh/terraform-latitudesh-server-module/actions/workflows/ci.yaml/badge.svg)](https://github.com/latitudesh/terraform-latitudesh-server-module/actions/workflows/ci.yaml)
+
 ## Usage
 
 First, export the LatitudeSH authentication token:
