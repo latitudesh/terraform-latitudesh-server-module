@@ -154,7 +154,7 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    needs: [validate, lint, security, test-examples]
+    needs: [build, lint, security, test-examples]
     if: github.event_name == 'release'
     steps:
       - name: Checkout code
