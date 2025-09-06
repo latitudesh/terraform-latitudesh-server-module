@@ -9,10 +9,6 @@ plugin "terraform" {
   preset = "recommended"
 }
 
-plugin "aws" {
-  enabled = false
-}
-
 rule "terraform_deprecated_interpolation" {
   enabled = true
 }
@@ -51,5 +47,9 @@ rule "terraform_naming_convention" {
 }
 
 rule "terraform_standard_module_structure" {
+  enabled = true
+}
+
+rule "terraform_workspace_remote" {
   enabled = true
 }

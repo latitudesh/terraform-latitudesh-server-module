@@ -30,7 +30,7 @@ jobs:
         run: terraform fmt -check -recursive
       
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -backend=false
       
       - name: Terraform Validate
         run: terraform validate
@@ -47,6 +47,8 @@ jobs:
         with:
           path: ~/.tflint.d/plugins
           key: tflint-${{ hashFiles('.tflint.hcl') }}
+          restore-keys: |
+            ${{ runner.os }}-tflint-
       
       - name: Install TFLint
         uses: terraform-linters/setup-tflint@v5
@@ -58,6 +60,14 @@ jobs:
 
       - name: Initialize TFLint
         run: tflint --init
+
+      - name: Verify TFLint config
+        run: |
+          echo "TFLint configuration:"
+          cat .tflint.hcl
+          echo
+          echo "Available plugins:"
+          ls -la ~/.tflint.d/plugins/ || echo "No plugins directory found"
       
       - name: Run TFLint
         run: tflint -f compact
@@ -72,6 +82,14 @@ jobs:
       - name: Run tfsec
         uses: aquasecurity/tfsec-action@v1.0.3
         with:
+          soft_fail: true
+
+      - name: Run Checkov
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: .
+          framework: terraform
           soft_fail: true
 
   test-examples:
@@ -97,7 +115,7 @@ jobs:
 
       - name: Terraform Init - ${{ matrix.example }}
         working-directory: examples/${{ matrix.example }}
-        run: terraform init
+        run: terraform init -backend=false
 
       - name: Terraform Plan - ${{ matrix.example }}
         working-directory: examples/${{ matrix.example }}
