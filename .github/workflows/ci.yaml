@@ -113,6 +113,16 @@ jobs:
         with:
           terraform_version: ${{ env.TF_VERSION }}
 
+      - name: Generate test SSH keys
+        run: |
+          # Create test SSH keys for CI
+          mkdir -p ~/.ssh/
+          ssh-keygen -t rsa -b 2048 -f ~/.ssh/id_rsa -N "" -C "ci-test-key"
+          chmod 600 ~/.ssh/id_rsa
+          chmod 644 ~/.ssh/id_rsa.pub
+          echo "Generated test SSH key for CI"
+          ls -la ~/.ssh/
+
       - name: Terraform Init - ${{ matrix.example }}
         working-directory: examples/${{ matrix.example }}
         run: terraform init -backend=false
