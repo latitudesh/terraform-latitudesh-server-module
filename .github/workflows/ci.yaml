@@ -70,7 +70,7 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Run tfsec
-        uses: tfsec/tfsec-action@v1.0.3
+        uses: aquasecurity/tfsec-action@v1.0.3
         with:
           soft_fail: true
 
@@ -91,7 +91,7 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v4
+        uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: ${{ env.TF_VERSION }}
 
