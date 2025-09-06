@@ -17,7 +17,7 @@ module "server" {
   hostname         = "tf-module-server-local-exec"
   operating_system = "ubuntu_24_04_x64_lts"
   plan             = "c2-medium-x86"
-  project          = "proj_X6KG5m9Lk5yPB"
+  project          = "proj_KF4I5l07AXgB6" # replace with your project id
   site             = "SAO"
 
   provisioners = {
