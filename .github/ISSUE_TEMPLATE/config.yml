@@ -1,0 +1,25 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📚 Documentation
+    url: https://github.com/latitudesh/terraform-latitudesh-server-module/blob/main/README.md
+    about: Check the module documentation and examples
+  
+  - name: 💬 Discussions
+    url: https://github.com/latitudesh/terraform-latitudesh-server-module/discussions
+    about: Ask questions and discuss ideas with the community
+  
+  - name: 🏥 Latitude.sh Support
+    url: https://support.latitude.sh
+    about: Get help with Latitude.sh platform issues
+  
+  - name: 📖 Terraform Documentation
+    url: https://registry.terraform.io/providers/latitudesh/latitudesh/latest/docs
+    about: Official Latitude.sh Terraform provider documentation
+
+  - name: 🛠️ Terraform Registry
+    url: https://registry.terraform.io/modules/latitudesh/server/latitudesh/latest
+    about: View this module on Terraform Registry
+
+  - name: 🔧 Provider Issues
+    url: https://github.com/latitudesh/terraform-provider-latitudesh/issues
+    about: Report issues with the Latitude.sh Terraform provider

@@ -17,7 +17,7 @@ module "server" {
   hostname         = "full-stack-server"
   operating_system = "ubuntu_24_04_x64_lts"
   plan             = "c3-large-x86"
-  project          = "proj_X6KG5m9Lk5yPB"
+  project          = "proj_KF4I5l07AXgB6" # replace with your project id
   site             = "SAO"
 
   # Opcionais
@@ -42,10 +42,7 @@ module "server" {
     }
 
     local_exec = {
-      command = "ansible-playbook -i '${self.primary_ipv4},' deploy-app.yml"
-      environment = {
-        ANSIBLE_HOST_KEY_CHECKING = "False"
-      }
+      command = "echo 'Server deployment completed' >> deployment.log"
     }
   }
 }

@@ -1,0 +1,145 @@
+name: 🚀 Feature Request
+description: Suggest a new feature or enhancement for the module
+title: "[Feature]: "
+labels: ["enhancement", "triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new feature! 🚀
+        
+        We appreciate your ideas for improving the terraform-latitudesh-server-module.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      description: Please verify these items before submitting
+      options:
+        - label: I have searched existing issues to ensure this is not a duplicate
+          required: true
+        - label: I have read the documentation and examples
+          required: true
+        - label: This feature would be generally useful to other users
+          required: true
+
+  - type: dropdown
+    id: feature-type
+    attributes:
+      label: Feature Type
+      description: What type of feature are you requesting?
+      options:
+        - New resource support
+        - New variable/parameter
+        - New output value
+        - Enhanced validation
+        - New provisioner support
+        - Documentation improvement
+        - Example enhancement
+        - Other (please specify)
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: Problem Description
+      description: Is your feature request related to a problem? Please describe.
+      placeholder: "I'm always frustrated when..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution-description
+    attributes:
+      label: Proposed Solution
+      description: Describe the solution you'd like to see implemented
+      placeholder: "I would like to be able to..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: example-usage
+    attributes:
+      label: Example Usage
+      description: How would you use this feature? Provide a code example if possible.
+      render: hcl
+      placeholder: |
+        module "server" {
+          source = "git::https://github.com/latitudesh/terraform-latitudesh-server-module.git"
+          
+          # New feature usage
+          new_parameter = "example_value"
+        }
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Describe any alternative solutions or features you've considered
+      placeholder: "I considered using... but it doesn't work because..."
+
+  - type: dropdown
+    id: breaking-change
+    attributes:
+      label: Breaking Change
+      description: Would this feature require breaking changes to the module?
+      options:
+        - "No - Fully backward compatible"
+        - "Minor - Optional new parameters only"
+        - "Yes - Would require migration"
+        - "Unsure"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this feature for your project?
+      options:
+        - Low - Nice to have
+        - Medium - Would improve workflow
+        - High - Important for project success
+        - Critical - Blocking project completion
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use Case
+      description: Describe your specific use case for this feature
+      placeholder: "We need this feature because our team..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Current Workaround
+      description: How are you currently solving this problem (if at all)?
+      placeholder: "Currently we work around this by..."
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context, screenshots, or examples about the feature request
+      placeholder: "Additional details..."
+
+  - type: dropdown
+    id: contribution
+    attributes:
+      label: Contribution
+      description: Would you be willing to contribute to implementing this feature?
+      options:
+        - "Yes - I can implement this feature"
+        - "Yes - I can help with testing"
+        - "Yes - I can help with documentation"
+        - "Maybe - Depends on complexity"
+        - "No - I cannot contribute code"
+    validations:
+      required: true

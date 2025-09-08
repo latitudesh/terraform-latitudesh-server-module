@@ -1,0 +1,65 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+
+  - package-ecosystem: "terraform"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+
+  - package-ecosystem: "terraform"
+    directory: "/examples/simple-server"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+
+  - package-ecosystem: "terraform"
+    directory: "/examples/server-with-provisioner-inline"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+
+  - package-ecosystem: "terraform"
+    directory: "/examples/server-with-provisioner-local-exec"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+
+  - package-ecosystem: "terraform"
+    directory: "/examples/server-with-provisioner-script"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+
+  - package-ecosystem: "terraform"
+    directory: "/examples/server-with-provisioner-scripts"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+
+  - package-ecosystem: "terraform"
+    directory: "/examples/server-with-multiple-provisioners"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "deps"
+      include: "scope"

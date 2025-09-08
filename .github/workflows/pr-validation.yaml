@@ -1,0 +1,119 @@
+name: Pull Request Validation
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+env:
+  TF_VERSION: "1.12.0"
+
+
+jobs:
+  changed-files:
+    name: Detect Changed Files
+    runs-on: ubuntu-latest
+    outputs:
+      terraform: ${{ steps.changes.outputs.terraform }}
+      examples: ${{ steps.changes.outputs.examples }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect changes
+        uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            terraform:
+              - '*.tf'
+              - '*.tfvars'
+              - '.terraform.lock.hcl'
+            examples:
+              - 'examples/**'
+
+  terraform-validate:
+    name: Validate Terraform Changes
+    runs-on: ubuntu-latest
+    needs: changed-files
+    if: needs.changed-files.outputs.terraform == 'true'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive
+
+      - name: Terraform Init
+        run: terraform init -backend=false
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Comment PR
+        uses: actions/github-script@v7
+        if: always()
+        with:
+          script: |
+            const output = `
+            ## Terraform Validation Results
+            
+            ✅ Terraform validation completed
+            
+            - Format check: ${{ job.status == 'success' && '✅ Passed' || '❌ Failed' }}
+            - Validation: ${{ job.status == 'success' && '✅ Passed' || '❌ Failed' }}
+            `;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            });
+
+  examples-test:
+    name: Test Example Changes
+    runs-on: ubuntu-latest
+    needs: changed-files
+    if: needs.changed-files.outputs.examples == 'true'
+    strategy:
+      matrix:
+        example:
+          - simple-server
+          - server-with-provisioner-inline
+          - server-with-provisioner-local-exec
+          - server-with-provisioner-script
+          - server-with-provisioner-scripts
+          - server-with-multiple-provisioners
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: Generate test SSH keys
+        run: |
+          # Create test SSH keys for CI
+          mkdir -p ~/.ssh/
+          ssh-keygen -t rsa -b 2048 -f ~/.ssh/id_rsa -N "" -C "ci-test-key"
+          chmod 600 ~/.ssh/id_rsa
+          chmod 644 ~/.ssh/id_rsa.pub
+          echo "Generated test SSH key for CI"
+          ls -la ~/.ssh/
+
+      - name: Test Example - ${{ matrix.example }}
+        working-directory: examples/${{ matrix.example }}
+        run: |
+          terraform init -backend=false
+          terraform plan
+        env:
+          TF_VAR_latitude_auth_token: "fake-token-for-plan"
