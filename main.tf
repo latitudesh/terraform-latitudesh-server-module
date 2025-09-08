@@ -11,7 +11,7 @@ resource "latitudesh_server" "this" {
 
   # Optional variables
   billing         = var.billing
-  ipxe            = var.ipxe
+  ipxe            = var.ipxe_url
   locked          = var.locked
   allow_reinstall = var.allow_reinstall
   raid            = var.raid
