@@ -131,25 +131,6 @@ jobs:
         run: terraform plan
         env:
           TF_VAR_latitude_auth_token: "fake-token-for-plan"
-
-  docs:
-    name: Generate Documentation
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Setup terraform-docs
-        uses: terraform-docs/gh-actions@v1.4.1
-        with:
-          working-dir: .
-          output-file: README.md
-          output-method: inject
-          git-push: "true"
-          git-commit-message: "docs: update terraform-latitudesh-server-module"
   
   release:
     name: Release
