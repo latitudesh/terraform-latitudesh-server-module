@@ -129,7 +129,7 @@ variable "billing" {
   }
 }
 
-variable "ipxe_url" {
+variable "ipxe" {
   type        = string
   description = "[Optional] URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when iPXE is selected as operating system."
   default     = null
