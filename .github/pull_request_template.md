@@ -40,6 +40,7 @@ Which examples have you tested with these changes?
 - [ ] `server-with-provisioner-script`
 - [ ] `server-with-provisioner-scripts`
 - [ ] `server-with-multiple-provisioners`
+- [ ] `server-with-ipxe`
 
 ## 📖 Documentation
 

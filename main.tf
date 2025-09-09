@@ -21,7 +21,7 @@ resource "latitudesh_server" "this" {
 }
 
 resource "null_resource" "remote_exec_inline" {
-  count = try(var.provisioners.remote_exec.inline, null) != null ? 1 : 0
+  count = var.provisioners.remote_exec != null && var.provisioners.remote_exec.inline != null ? 1 : 0
 
   triggers = {
     server_id = latitudesh_server.this.id
@@ -47,7 +47,7 @@ resource "null_resource" "remote_exec_inline" {
 }
 
 resource "null_resource" "remote_exec_script" {
-  count = try(var.provisioners.remote_exec.script, null) != null && try(var.provisioners.remote_exec.inline, null) == null ? 1 : 0
+  count = var.provisioners.remote_exec != null && var.provisioners.remote_exec.script != null && var.provisioners.remote_exec.inline == null ? 1 : 0
 
   triggers = {
     server_id = latitudesh_server.this.id
@@ -73,7 +73,7 @@ resource "null_resource" "remote_exec_script" {
 }
 
 resource "null_resource" "remote_exec_scripts" {
-  count = try(var.provisioners.remote_exec.scripts, null) != null && try(var.provisioners.remote_exec.inline, null) == null && try(var.provisioners.remote_exec.script, null) == null ? 1 : 0
+  count = var.provisioners.remote_exec != null && var.provisioners.remote_exec.scripts != null && var.provisioners.remote_exec.inline == null && var.provisioners.remote_exec.script == null ? 1 : 0
 
   triggers = {
     server_id = latitudesh_server.this.id
@@ -99,7 +99,7 @@ resource "null_resource" "remote_exec_scripts" {
 }
 
 resource "null_resource" "local_exec" {
-  count = try(var.provisioners.local_exec, null) != null ? 1 : 0
+  count = var.provisioners.local_exec != null ? 1 : 0
 
   triggers = {
     server_id = latitudesh_server.this.id

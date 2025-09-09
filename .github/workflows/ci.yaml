@@ -103,6 +103,7 @@ jobs:
           - server-with-provisioner-script
           - server-with-provisioner-scripts
           - server-with-multiple-provisioners
+          - server-with-ipxe
     steps:
       - name: Checkout code
         uses: actions/checkout@v5

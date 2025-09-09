@@ -18,7 +18,7 @@ module "server" {
   operating_system = "ubuntu_24_04_x64_lts"
   plan             = "c2-small-x86"
   project          = "proj_KF4I5l07AXgB6" # replace with your project id
-  site             = "SAO"
+  site             = "SAO2"
 
   ssh_keys = ["ssh_id_here"]
 
