@@ -15,8 +15,8 @@ Then, you can use the module in your Terraform code:
 
 ```hcl
 module "server" {
-  source = "git::https://github.com/latitudesh/terraform-latitudesh-server-module.git"
-
+  source           = "latitudesh/server/latitudesh"
+  version          = ">= 1.0.0"
   hostname         = "tf-module-test-simple-server"
   operating_system = "ubuntu_24_04_x64_lts"
   plan             = "c2-small-x86"
